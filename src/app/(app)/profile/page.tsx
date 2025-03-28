@@ -1,9 +1,13 @@
-import { Profile } from '@/components/profile/index';
+import { Profile } from './profile';
+import { Profile as ProfileType } from '@/types';
+import { getAccount } from '@/lib/mocks';
 
 export default function ProfilePage() {
+  const profile: ProfileType = getAccount('ownUser123');
+
   return (
-    <section>
-      <Profile />
-    </section>
+    <>
+      <Profile profile={profile} />
+    </>
   );
 }

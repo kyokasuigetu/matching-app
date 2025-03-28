@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { LayoutList, Handshake, MessageSquare, User } from "lucide-react";
+import { LayoutList, MessageSquare, UserSearch, User } from "lucide-react";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 
 export default function Header() {
@@ -22,10 +22,10 @@ export default function Header() {
           <NavItem href="/timeline" label="タイムライン">
             <LayoutList className="h-6 w-6 text-gray-600 group-hover:text-primary" />
           </NavItem>
-          <NavItem href="/matching" label="マッチング">
-            <Handshake className="h-6 w-6 text-gray-600 group-hover:text-primary" />
+          <NavItem href="/matching" label="さがす">
+            <UserSearch className="h-6 w-6 text-gray-600 group-hover:text-primary" />
           </NavItem>
-          <NavItem href="/chat" label="チャット">
+          <NavItem href="/chat" label="メッセージ">
             <MessageSquare className="h-6 w-6 text-gray-600 group-hover:text-primary" />
           </NavItem>
           <NavItem href="/profile" label="マイページ">
