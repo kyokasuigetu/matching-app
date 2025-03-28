@@ -6,11 +6,14 @@ export default function Home() {
     <>
       <main className="text-center my-10 space-y-5">
         <h1>Welocome to Matching App Demo!!</h1>
-        <Button>
-          <Link href="/login">
-            Login
+        <div className="grid grid-cols-1 mx-auto max-w-xs gap-5">
+          <Link className="w-full" href="/login">
+            <Button className="w-full">Login</Button>
           </Link>
-        </Button>
+          <Link className="w-full" href="/register">
+            <Button className="w-full">Register</Button>
+          </Link>
+        </div>
       </main>
     </>
   );
