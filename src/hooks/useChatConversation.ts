@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 export function useChatConversion (matchId: string) {
   console.log(matchId);
 
-  const [partner, setPartner] = useState(mockPartner);
+  const [partner, ] = useState(mockPartner);
   const [messages, setMessages] = useState(mockMessages);
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
