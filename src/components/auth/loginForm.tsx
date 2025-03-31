@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import {
   Form,
   FormField,
@@ -20,12 +19,8 @@ export function LoginForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full max-w-md space-y-6"
+        className="w-full space-y-10 pt-5"
       >
-        <h1 className="flex flex-col justify-center items-center">
-          <span className="font-bold text-xl">--- Set Logo ---</span>
-          <span className="font-bold text-lg">アカウント作成</span>
-        </h1>
         <div className="space-y-4">
           {/* メールアドレスフィールド */}
           <FormField
@@ -57,7 +52,7 @@ export function LoginForm() {
           />
         </div>
         <Button type="submit" className="w-full">
-          登録する
+          ログイン
         </Button>
       </form>
     </Form>

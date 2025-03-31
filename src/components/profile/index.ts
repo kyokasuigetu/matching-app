@@ -1,3 +1,7 @@
+export { ProfileBackground } from './profileBackground';
+export { ProfileAvatar } from './profileAvatar';
+export { CompanyName } from './companyName';
+export { Categories } from './categories';
 export { ProfileEditForm } from './profileEditForm';
 export { ProfileStatus } from './profileStatus';
 export { ProfileTextSections } from './profileTextSections';

@@ -1,8 +1,17 @@
 'use client';
 
 import Link from "next/link";
-import { LayoutList, MessageSquare, UserSearch, User } from "lucide-react";
+import { LayoutList, MessageSquare, UserSearch, User, LogOut } from "lucide-react";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default function Header() {
   const { isVisible } = useScrollDirection();
@@ -22,7 +31,7 @@ export default function Header() {
           <NavItem href="/timeline" label="タイムライン">
             <LayoutList className="h-6 w-6 text-gray-600 group-hover:text-primary" />
           </NavItem>
-          <NavItem href="/matching" label="さがす">
+          <NavItem href="/search" label="さがす">
             <UserSearch className="h-6 w-6 text-gray-600 group-hover:text-primary" />
           </NavItem>
           <NavItem href="/chat" label="メッセージ">
@@ -31,15 +40,22 @@ export default function Header() {
           <NavItem href="/profile" label="マイページ">
             <User className="h-6 w-6 text-gray-600 group-hover:text-primary" />
           </NavItem>
+
+          {/* ログアウト */}
+          <LogoutDialog />
         </nav>
       </div>
     </header>
   );
 }
 
-function NavItem ({ children, href, label }: {
+function NavItem({
+  children,
+  href,
+  label,
+}: {
   children: React.ReactNode;
-  href:  string;
+  href: string;
   label: string;
 }) {
   return (
@@ -51,5 +67,37 @@ function NavItem ({ children, href, label }: {
         {label}
       </span>
     </Link>
+  );
+}
+
+import { signOut } from "next-auth/react";
+
+function LogoutDialog () {
+  return (
+    <Dialog>
+      <DialogTrigger>
+        <div className="flex flex-col items-center group">
+          <div className="p-2 rounded-full group-hover:bg-gray-100 transition-colors">
+            <LogOut className="h-6 w-6 text-gray-600 group-hover:text-primary" />
+          </div>
+          <span className="text-xs text-gray-500 group-hover:text-primary hidden sm:block">
+            ログアウト
+          </span>
+        </div>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle className="text-center">ログアウトしてもよろしいですか？</DialogTitle>
+          <DialogDescription className="flex justify-center my-5">
+            <Button
+              onClick={() => signOut()}
+              className="bg-primary text-white p-5 rounded-md"
+            >
+              ログアウト
+            </Button>
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
   );
 }

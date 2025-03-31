@@ -1,6 +1,5 @@
-"use client";
+"use client"; // useFormがクライアントサイドでのみ動作
 
-import * as React from "react";
 import {
   Form,
   FormField,
@@ -13,48 +12,16 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRegister }  from "@/hooks";
 
-export function RegsiterForm() {
+export function RegisterForm() {
   const { form, onSubmit } = useRegister();
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full max-w-md space-y-6"
+        className="w-full space-y-10 pt-5"
       >
-        <h1 className="flex flex-col justify-center items-center">
-          <span className="font-bold text-xl">--- Set Logo ---</span>
-          <span className="font-bold text-lg">アカウント作成</span>
-        </h1>
         <div className="space-y-4">
-          {/* 会社名フィールド */}
-          <FormField
-            control={form.control}
-            name="companyName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>会社名</FormLabel>
-                <FormControl>
-                  <Input placeholder="株式会社サンプル" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {/* 担当者名フィールド */}
-          <FormField
-            control={form.control}
-            name="personalName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>担当者名</FormLabel>
-                <FormControl>
-                  <Input placeholder="山田 太郎" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           {/* メールアドレスフィールド */}
           <FormField
             control={form.control}

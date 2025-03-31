@@ -1,17 +1,16 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema, LoginFormValues } from "@/schemas/authSchemas";
+import { emailSchema, emailFormValues } from "@/schemas/authSchemas";
 
 export function useLogin() {
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<emailFormValues>({
+    resolver: zodResolver(emailSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
-  const onSubmit = (data: LoginFormValues) => {
+  const onSubmit = (data: emailFormValues) => {
     console.log("登録データ:", data);
   };
 

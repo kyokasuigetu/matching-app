@@ -1,19 +1,16 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema, RegisterFormValues } from "@/schemas/authSchemas";
+import { emailSchema, emailFormValues } from "@/schemas/authSchemas";
 
 export function useRegister() {
-  const form = useForm<RegisterFormValues>({
-    resolver: zodResolver(registerSchema),
+  const form = useForm<emailFormValues>({
+    resolver: zodResolver(emailSchema),
     defaultValues: {
-      companyName: "",
-      personalName: "",
       email: "",
-      password: "",
     },
   });
 
-  const onSubmit = (data: RegisterFormValues) => {
+  const onSubmit = (data: emailFormValues) => {
     console.log("登録データ:", data);
   };
 

@@ -1,17 +1,33 @@
 import type { Profile } from "@/types";
 
-export function ProfileTextSections({ data } : { data: Profile }) {
+export function ProfileTextSections({
+  data,
+  isSummalized = false
+} : {
+  data: Profile
+  isSummalized: boolean
+}) {
   return (
     <div className="pt-2 space-y-5">
-      {data.history &&
-        <ProfileSection title="沿革" content={data.history} />
-      }
-      {data.businessDescription &&
-        <ProfileSection title="事業について" content={data.businessDescription} />
-      }
-      {data.message &&
-        <ProfileSection title="メッセージ" content={data.message} />
-      }
+      {isSummalized && (
+        <>
+          <ProfileSection
+            title="事業について"
+            content={data.businessDescription || ""}
+          />
+          <ProfileSection title="メッセージ" content={data.message || ""} />
+        </>
+      )}
+      {!isSummalized && (
+        <>
+          <ProfileSection title="沿革" content={data.history || ""} />
+          <ProfileSection
+            title="事業について"
+            content={data.businessDescription || ""}
+          />
+          <ProfileSection title="メッセージ" content={data.message || ""} />
+        </>
+      )}
     </div>
   );
 }
