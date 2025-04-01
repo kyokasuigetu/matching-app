@@ -1,4 +1,4 @@
-import { Profile } from "@/components/profile/index";
+import { Profile } from "../profile";
 import { Profile as ProfileType } from "@/types";
 import { getAccount } from "@/lib/mocks";
 

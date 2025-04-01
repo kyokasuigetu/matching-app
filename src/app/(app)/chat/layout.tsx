@@ -9,7 +9,7 @@ export default function ChatLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [mounted, setMounted] = useState(false);
+  const [, setMounted] = useState(false);
   const pathname = usePathname();
   const pathId = pathname ? pathname.split("/").pop() : "";
 
@@ -22,7 +22,7 @@ export default function ChatLayout({
     <div className="flex h-full">
       {/* チャットルーム一覧 */}
       <div
-        className={`flex flex-col max-w-xl md:max-w-sm mx-auto mb-1 p-3 md:p-0 ${
+        className={`flex flex-col max-w-xl w-full md:max-w-sm mx-auto mb-1 p-3 md:p-0 ${
           // モバイル時、pathIdが存在すれば非表示、なければ表示
           pathId !== "chat" ? "hidden md:block" : "block"
         }`}

@@ -14,13 +14,13 @@ export function ChatRoom({ matchId }: { matchId: string }) {
   const {
     partner,
     messages,
-    setMessages,
+    // setMessages,
     newMessage,
     setNewMessage,
     messagesEndRef,
     handleKeyPress,
     handleSendMessage
-  } = useChatConversion(matchId.matchId);
+  } = useChatConversion(matchId);
 
   return (
     <div className="flex flex-col h-screen mx-auto">

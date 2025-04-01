@@ -27,7 +27,7 @@ export default function Header() {
         <h1 className="text-3xl font-bold text-gray-900">LOGO</h1>
 
         {/* アイコン付きのメニュー */}
-        <nav className="flex items-center space-x-6">
+        <nav className="flex items-center space-x-3 md:space-x-6">
           <NavItem href="/timeline" label="タイムライン">
             <LayoutList className="h-6 w-6 text-gray-600 group-hover:text-primary" />
           </NavItem>
