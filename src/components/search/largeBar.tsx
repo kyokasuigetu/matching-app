@@ -2,11 +2,20 @@
 
 import { useState } from "react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
+import { Category } from "@/types/profile";
 
-export function LargeBar() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null)
+type LargeBarProps = {
+  categories: Category[];
+};
+
+export function LargeBar({ categories }: LargeBarProps) {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(
+    null
+  );
+
+  console.log(categories);
 
   return (
     <div className="w-full h-screen bg-background border-r flex flex-col">
@@ -15,9 +24,17 @@ export function LargeBar() {
 
       {/* カテゴリリスト */}
       <div className="flex-1 overflow-auto py-2">
-        <Accordion type="multiple" defaultValue={Object.keys(lists)} className="w-full">
+        <Accordion
+          type="multiple"
+          defaultValue={Object.keys(lists)}
+          className="w-full"
+        >
           {Object.entries(lists).map(([category, subcategories]) => (
-            <AccordionItem value={category} key={category} className="border-b-0">
+            <AccordionItem
+              value={category}
+              key={category}
+              className="border-b-0"
+            >
               <AccordionTrigger className="py-3 px-4 hover:bg-muted/50 text-sm font-medium">
                 {category}
               </AccordionTrigger>
@@ -28,13 +45,14 @@ export function LargeBar() {
                       <button
                         className={cn(
                           "w-full text-left py-2 px-8 text-sm transition-colors hover:bg-muted/50",
-                          selectedCategory === category && selectedSubcategory === subcategory
+                          selectedCategory === category &&
+                            selectedSubcategory === subcategory
                             ? "bg-muted font-medium text-primary"
-                            : "text-muted-foreground",
+                            : "text-muted-foreground"
                         )}
                         onClick={() => {
-                          setSelectedCategory(category)
-                          setSelectedSubcategory(subcategory)
+                          setSelectedCategory(category);
+                          setSelectedSubcategory(subcategory);
                         }}
                       >
                         {subcategory}
@@ -51,8 +69,12 @@ export function LargeBar() {
       {/* サイドバーフッター */}
       <div className="p-4 border-t bg-muted/30">
         <div className="flex items-center justify-between">
-          <span className="text-xs text-muted-foreground">全てのカテゴリを表示</span>
-          <span className="text-xs font-medium text-primary">{Object.values(lists).flat().length} 項目</span>
+          <span className="text-xs text-muted-foreground">
+            全てのカテゴリを表示
+          </span>
+          <span className="text-xs font-medium text-primary">
+            {Object.values(lists).flat().length} 項目
+          </span>
         </div>
       </div>
     </div>

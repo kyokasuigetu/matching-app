@@ -1,15 +1,11 @@
 import { PrismaClient } from "@prisma/client";
-import { categories } from "./categories";
+import { seedCategories } from "../../src/server/seeder/categories";
 
 const prisma = new PrismaClient();
 
 async function main() {
   // categories
-  for (const category of categories) {
-    await prisma.majorCategory.create({
-      data: category,
-    });
-  }
+  await seedCategories(prisma);
 
   // profiles
 }

@@ -1,3 +1,13 @@
+import { PrismaClient } from "@prisma/client";
+
+export async function seedCategories(prisma: PrismaClient) {
+  for (const category of categories) {
+    await prisma.majorCategory.create({
+      data: category,
+    });
+  }
+}
+
 export const categories = [
   {
     name: "IT",

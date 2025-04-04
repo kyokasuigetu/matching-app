@@ -40,3 +40,7 @@ export type LinkLabel =
   | "youTube"
   | "linkedIn"
   | "others";
+
+export type Category = {
+  [key: string]: string[];
+};
