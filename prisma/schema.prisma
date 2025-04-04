@@ -58,3 +58,17 @@ model VerificationToken {
 
   @@id([identifier, token])
 }
+
+model MajorCategory {
+  id            Int           @id @default(autoincrement())
+  name          String        @db.VarChar(100)
+  subCategories SubCategory[]
+}
+
+model SubCategory {
+  id               Int           @id @default(autoincrement())
+  majorCategoryId  Int
+  name             String        @db.VarChar(100)
+  
+  majorCategory    MajorCategory @relation(fields: [majorCategoryId], references: [id])
+}

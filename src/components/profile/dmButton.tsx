@@ -14,8 +14,8 @@ export function DMButton () {
       className="w-full bg-black rounded-4xl"
     >
       <div className="flex items-center gap-4 font-bold">
-        <MessageSquare className="h-5 w-5" />
-        メッセージを送る
+        <MessageSquare className="h-4 w-4" />
+        メッセージ
       </div>
     </Button>
   );

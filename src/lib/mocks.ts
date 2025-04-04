@@ -3,7 +3,7 @@ import type { Profile } from "@/types";
 
 export function getAccount(account_id: string): Profile {
   return {
-    id: account_id,
+    user_id: account_id,
     companyName: "テクノソリューション株式会社",
     representativeName: "山田 太郎",
     icon: "/company-image.png",

@@ -1,7 +1,7 @@
 export interface Profile {
-  id:                  string;
-  companyName:         string;
-  representativeName:  string;
+  user_id:             string;
+  companyName:         string | null;
+  representativeName:  string | null;
   icon:                string | null;   // アイコン画像URL
   background:          string | null;   // 背景画像URL
   industry:            string[] | null; // 事業カテゴリ（最大5個程度）

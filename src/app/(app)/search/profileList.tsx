@@ -36,7 +36,7 @@ function ProfileCard ({ profile }: { profile: Profile }) {
           <Avatar className="h-16 w-16 sm:h-24 sm:w-24 border-2 border-white bg-white">
             <AvatarImage
               src={data.icon || "company-image.png"}
-              alt={data.companyName}
+              alt={data.companyName || "avatar-image"}
             />
             <AvatarFallback>{data.companyName}</AvatarFallback>
           </Avatar>
