@@ -8,9 +8,9 @@ import {
   Globe,
 } from "lucide-react";
 import Link from "next/link";
-import type { Link as LinkType } from "@/types";
+import type { OutputLink } from "@/types";
 
-export function Links(links?: { links: LinkType[] }) {
+export function Links(links?: { links: OutputLink[] }) {
   // 棚卸し
   const data = links?.links;
 
@@ -40,26 +40,26 @@ export function Links(links?: { links: LinkType[] }) {
   return (
     <div className="flex flex-col gap-2">
       {data.map((link, index) => {
-          // リンクの種類によってアイコンを変更
-          const IconComponent = getIconForLabel(link.label);
+        // リンクの種類によってアイコンを変更
+        const IconComponent = getIconForLabel(link.label);
 
-          return (
-            <Link
-              key={index}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-primary underline hover:no-underline"
-            >
-              <div className="min-h-5 min-w-5 h-5 w-5">
-                <IconComponent className="w-full h-full" />
-              </div>
-              <span className="break-all">
-                {link.url.replace(/^https?:\/\//, "")}
-              </span>
-            </Link>
-          );
-        })}
+        return (
+          <Link
+            key={index}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-primary underline hover:no-underline"
+          >
+            <div className="min-h-5 min-w-5 h-5 w-5">
+              <IconComponent className="w-full h-full" />
+            </div>
+            <span className="break-all">
+              {link.url.replace(/^https?:\/\//, "")}
+            </span>
+          </Link>
+        );
+      })}
     </div>
   );
 }

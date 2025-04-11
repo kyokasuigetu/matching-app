@@ -1,9 +1,9 @@
 import { SmallBar, LargeBar } from "@/components/search";
 import { getAllCategories } from "@/server/usecases/getAllCategories";
-import { Category } from "@/types/profile";
+import { OutputCategory } from "@/types/category";
 
 export async function SearchBar() {
-  const categories: Category[] = await getAllCategories();
+  const categories: OutputCategory = await getAllCategories();
 
   return (
     <aside className="p-5 border-b-1 border-gray-100 md:border-b-0">

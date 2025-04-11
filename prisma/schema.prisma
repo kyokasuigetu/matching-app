@@ -18,6 +18,13 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  // プロフィール
+  profile            Profile?
+
+  // チャットルーム
+  chatRoomParticipants ChatRoomParticipant[]
+  chatRoomMessages     ChatMessage[]
 }
 
 model Account {
@@ -63,6 +70,8 @@ model MajorCategory {
   id            Int           @id @default(autoincrement())
   name          String        @db.VarChar(100)
   subCategories SubCategory[]
+
+  @@map("majorCategories")
 }
 
 model SubCategory {
@@ -71,4 +80,140 @@ model SubCategory {
   name             String        @db.VarChar(100)
   
   majorCategory    MajorCategory @relation(fields: [majorCategoryId], references: [id])
+  profiles         ProfileCategory[]
+
+  @@map("subCategories")
 }
+
+enum EmployeeCount {
+  ONE_TO_NINE           @map("1～9人")
+  TEN_TO_TWENTY_NINE    @map("10～29人")
+  THIRTY_TO_FORTY_NINE   @map("30～49人")
+  FIFTY_TO_NINETY_NINE   @map("50～99人")
+  ONE_HUNDRED_TO_199     @map("100～199人")
+  TWO_HUNDRED_TO_299     @map("200～299人")
+  THREE_HUNDRED_TO_499   @map("300～499人")
+  FIVE_HUNDRED_TO_999    @map("500～999人")
+  ONE_THOUSAND_TO_1999   @map("1000～1999人")
+  OVER_2000             @map("2000人以上")
+}
+
+enum LinkLabel {
+  corporateSite
+  facebook
+  x
+  instagram
+  youTube
+  linkedIn
+  others
+}
+
+model Profile {
+  userId              String          @id
+  companyName         String?
+  contactName         String?
+  iconUrl             String?
+  backgroundUrl       String?
+  companyHistory      String?         @db.VarChar(1000)
+  businessDescription String?
+  message             String?
+  employeeCount       EmployeeCount?
+  establishmentYear   Int?
+  capital             Int?
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  user                User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  links               ProfileLink[]
+  categories          ProfileCategory[]
+
+  @@map("profiles")
+}
+
+model ProfileLink {
+  id         Int      @id @default(autoincrement())
+  profileId  String
+  label      LinkLabel
+  link       String
+
+  profile    Profile  @relation(fields: [profileId], references: [userId])
+
+  @@map("profileLinks")
+}
+
+model ProfileCategory {
+  id            Int    @id @default(autoincrement())
+  userId        String
+  subCategoryId Int
+
+  profile       Profile? @relation(fields: [userId], references: [userId])
+  subCategory   SubCategory  @relation(fields: [subCategoryId], references: [id])
+
+  @@map("profileCategories")
+}
+
+enum ChatRoomType {
+  direct
+  group
+}
+
+model ChatRoom {
+  id         String       @id @default(cuid())
+  type       ChatRoomType
+  title      String?      @db.VarChar(255)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  // リレーション
+  participants ChatRoomParticipant[]
+  messages     ChatMessage[]
+
+  @@map("chatRooms")
+}
+
+model ChatRoomParticipant {
+  id         Int       @id @default(autoincrement())
+  roomId     String    // ChatRoomのidはString型なので合わせる
+  userId     String
+  lastReadAt DateTime
+  joinedAt   DateTime
+
+  // リレーション
+  chatRoom   ChatRoom  @relation(fields: [roomId], references: [id])
+  user       User      @relation(fields: [userId], references: [id])
+
+  @@map("chatRoomParticipants")
+}
+
+model ChatMessage {
+  id        Int       @id @default(autoincrement())
+  roomId    String
+  authorId  String
+  content   String    @db.Text
+  type      String    @db.VarChar(20)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  // リレーション
+  author    User      @relation(fields: [authorId], references: [id])
+  chatRoom  ChatRoom  @relation(fields: [roomId], references: [id])
+  // files     ChatFile[]
+
+  @@map("chatMessages")
+}
+
+// model ChatFile {
+//   id            Int      @id @default(autoincrement())
+//   chatMessageId Int      @map("chat_message_id")
+//   fileUrl       String   @db.Text
+//   fileName      String?  @db.VarChar(255)
+//   fileType      String   @db.VarChar(50)
+//   fileSize      BigInt
+//   createdAt     DateTime @default(now())
+//   updatedAt     DateTime @updatedAt
+
+//   // リレーション
+//   chatMessage   ChatMessage @relation(fields: [chatMessageId], references: [id])
+
+//   @@map("chatFiles")
+// }

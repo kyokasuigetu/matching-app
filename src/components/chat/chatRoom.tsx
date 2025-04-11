@@ -9,7 +9,6 @@ import Link from "next/link";
 import { useChatConversion } from "@/hooks";
 import { isNewDay, formatTimestamp } from "@/lib/helpers";
 
-
 export function ChatRoom({ matchId }: { matchId: string }) {
   const {
     partner,

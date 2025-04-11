@@ -30,20 +30,12 @@ const providers = [
 
       const transport = createTransport(server);
 
-      console.log({
-        to: email,
-        from,
-        subject: `Sign in to ${host}`,
-        text: text({ url, host }),
-        html: html({ url, host, email }),
-      });
-
       await transport.sendMail({
         to: email,
         from,
         subject: `Sign in to ${host}`,
         text: text({ url, host }),
-        html: html({ url, host, email }),
+        html: html({ url, host }),
       });
     },
   }),

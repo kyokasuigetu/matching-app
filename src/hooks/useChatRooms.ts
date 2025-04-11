@@ -12,7 +12,11 @@ export function useChatRooms() {
       room.lastMessage.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  return { searchQuery, setSearchQuery, filteredChatRooms };
+  return {
+    searchQuery,
+    setSearchQuery,
+    filteredChatRooms
+  };
 }
 
 // モックデータ

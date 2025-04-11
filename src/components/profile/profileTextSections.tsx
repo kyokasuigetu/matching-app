@@ -1,11 +1,11 @@
-import type { Profile } from "@/types";
+import type { OutputProfile } from "@/types";
 
 export function ProfileTextSections({
   data,
-  isSummalized = false
-} : {
-  data: Profile
-  isSummalized: boolean
+  isSummalized = false,
+}: {
+  data: OutputProfile;
+  isSummalized: boolean;
 }) {
   return (
     <div className="pt-2 space-y-5">
@@ -20,7 +20,7 @@ export function ProfileTextSections({
       )}
       {!isSummalized && (
         <>
-          <ProfileSection title="沿革" content={data.history || ""} />
+          <ProfileSection title="沿革" content={data.companyHistory || ""} />
           <ProfileSection
             title="事業について"
             content={data.businessDescription || ""}

@@ -1,5 +1,7 @@
-'use client';
+"use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -9,38 +11,55 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-import { Category } from "@/types/profile";
+import { OutputCategory, OutputSubCategory } from "@/types/category";
 
 type SmallBarProps = {
-  categories: Category[];
+  categories: OutputCategory;
 };
 
-
 export function SmallBar({ categories }: SmallBarProps) {
+  const router = useRouter();
+  const [, setSelectedCategory] = useState<string | null>(null);
+  const [selectedSubcategoryId, setSelectedSubcategoryId] = useState<string | undefined>(undefined);
+
+  const handleSelectChange = (value: string) => {
+    setSelectedSubcategoryId(value);
+    let foundCategory: string | null = null;
+    for (const [cat, subs] of Object.entries(categories)) {
+      if (subs.some((sub: OutputSubCategory) => String(sub.id) === value)) {
+        foundCategory = cat;
+        break;
+      }
+    }
+    setSelectedCategory(foundCategory);
+    router.push(`/search?categoryId=${value}`);
+  };
+
   return (
     <>
       <h1 className="text-center mb-5">カテゴリ</h1>
-      <Select>
+      <Select value={selectedSubcategoryId} onValueChange={handleSelectChange}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Theme" />
         </SelectTrigger>
         <SelectContent>
-          {categories.map((category: Category, index: number) => {
-            // 各Categoryは1つのキーと値のペアを持つと仮定
-            const [categoryName, items] = Object.entries(category)[0];
-            return (
+          {Object.entries(categories).map(
+            ([category, subCategories], index) => (
               <SelectGroup key={index}>
-                <SelectLabel className="text-lg font-bold border-b-1 border-gray-100">
-                  {categoryName}
+                <SelectLabel className="text-lg font-bold border-b border-gray-100">
+                  {category}
                 </SelectLabel>
-                {items.map((item: string, idx: number) => (
-                  <SelectItem key={`${index}-${idx}`} value={item}>
-                    {item}
+                {subCategories.map((subCategory: OutputSubCategory) => (
+                  <SelectItem
+                    key={subCategory.id}
+                    value={String(subCategory.id)}
+                  >
+                    {subCategory.name}
                   </SelectItem>
                 ))}
               </SelectGroup>
-            );
-          })}
+            )
+          )}
         </SelectContent>
       </Select>
     </>

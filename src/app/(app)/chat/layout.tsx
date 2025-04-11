@@ -27,7 +27,7 @@ export default function ChatLayout({
           pathId !== "chat" ? "hidden md:block" : "block"
         }`}
       >
-        <SearchQuery />
+        {/* <SearchQuery /> */}
         <Rooms />
       </div>
 

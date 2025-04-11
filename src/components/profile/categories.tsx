@@ -1,13 +1,13 @@
 import { Badge } from "@/components/ui/badge";
-import type { Profile } from "@/types";
+import type { OutputProfile, OutputCategory } from "@/types";
 
-export function Categories({ data }: { data: Profile }) {
+export function Categories({ data }: { data: OutputProfile }) {
   return (
     <div className="flex flex-wrap gap-2 mt-2">
-      {data.industry &&
-        data.industry.map((ind, index) => (
+      {data.categories &&
+        data.categories.map((cat: OutputCategory, index: number) => (
           <Badge key={index} variant="secondary">
-            {ind}
+            {cat.name}
           </Badge>
         ))}
     </div>

@@ -23,3 +23,12 @@ export const formatAmount = (amount: number) => {
   // 1億円以上
   return `${Math.floor(amount / 100000000)}億円`;
 }
+
+export const isValidUrl = (url: string): boolean => {
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+}

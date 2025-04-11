@@ -37,7 +37,7 @@ export default function Header() {
           <NavItem href="/chat" label="メッセージ">
             <MessageSquare className="h-6 w-6 text-gray-600 group-hover:text-primary" />
           </NavItem>
-          <NavItem href="/profile" label="マイページ">
+          <NavItem href="/profiles" label="マイページ">
             <User className="h-6 w-6 text-gray-600 group-hover:text-primary" />
           </NavItem>
 
